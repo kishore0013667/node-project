@@ -1,7 +1,0 @@
-export const authData = (res,req)=>{
-
-    console.log(req);
-
-const {name,subject,datas} = req.body
-
-}
