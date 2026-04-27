@@ -1,0 +1,10 @@
+import express from "express"
+import { authData } from "../Controller/authController.js"
+
+
+const route = express.Router() 
+
+route.post("app/user/",authData)
+
+export default route
+
