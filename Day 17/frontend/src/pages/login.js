@@ -1,0 +1,49 @@
+import { useState } from "react";
+
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const loginUser = async () => {
+    const res = await fetch("http://localhost:5000/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem("token", data.token);
+
+      // move to dashboard
+      window.location.href = "/dashboard";
+    } else {
+      alert(data.msg);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Login</h2>
+
+      <input
+        type="email"
+        placeholder="Enter email"
+        onChange={(e) => setEmail(e.target.value)}
+      />
+
+      <input
+        type="password"
+        placeholder="Enter password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <button onClick={loginUser}>Login</button>
+    </div>
+  );
+}
+
+export default Login;
